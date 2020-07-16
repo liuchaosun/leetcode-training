@@ -27,7 +27,6 @@ var isPalindrome = function (x) {
   //     }
   // }
   // return true;
-
   // @2 不用字符串--数字翻转一遍看与原值是否相等
   // 这里有两个需要注意的问题是回文数的话数字是正常的，不是回文数翻转之后有溢出的可能
   if (x < 0) {
@@ -48,7 +47,6 @@ var isPalindrome = function (x) {
       x = parseInt(x);
     }
   }
-
   return y === x0;
 };
 // @lc code=end
