@@ -29,6 +29,7 @@ var maxRotateFunction = function (A) {
   //   if (fk > max || (!max && max !== 0)) {
   //     max = fk;
   //   }
+  //   console.log(fk);
   // }
 
   // return max || 0;
@@ -47,7 +48,7 @@ var maxRotateFunction = function (A) {
     last_tmp += i * A[i];
   }
 
-  let max = -Number.MAX_SAFE_INTEGER;
+  let max = last_tmp;
   for (let i = 1; i < len; i++) {
     last_tmp = last_tmp + totalA - A[len - 1] - (len - 1) * A[len - 1];
     A.unshift(A.pop());
