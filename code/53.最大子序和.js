@@ -10,10 +10,13 @@
  * @return {number}
  */
 var maxSubArray = function (nums) {
+  if (nums.length < 1) {
+    return;
+  }
   // 先找出数组中最大的值
   let maxLen = nums.length;
-  let maxNum = 0;
-  for (let i = 0; i < maxLen; i++) {
+  let maxNum = nums[0];
+  for (let i = 1; i < maxLen; i++) {
     if (nums[i] > maxNum) {
       maxNum = nums[i];
     }
@@ -24,9 +27,14 @@ var maxSubArray = function (nums) {
   for (let i = 0; i < maxLen; i++) {
     if (total + nums[i] > 0) {
       total += nums[i];
+      if (total > maxNum) {
+        maxNum = total;
+      }
     } else {
       total = 0;
     }
   }
+
+  return maxNum;
 };
 // @lc code=end
