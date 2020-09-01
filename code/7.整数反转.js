@@ -15,26 +15,42 @@
  */
 var reverse = function (x) {
   // 记住符号
-  // let symbol = null;
-  // if (x < 0) {
-  //   symbol = '-';
-  //   x = 0 - x;
+  // // let symbol = null;
+  // // if (x < 0) {
+  // //   symbol = '-';
+  // //   x = 0 - x;
+  // // }
+
+  // let y = 0;
+  // let max = Math.pow(2, 31) / 10;
+  // while (x !== 0) {
+  //   // 按照题意这里需要先判断 @!!!!!!
+  //   if (Math.abs(y) > max) {
+  //     return 0;
+  //   }
+  //   y = y * 10 + (x % 10);
+  //   x = parseInt(x / 10);
   // }
 
+  // // if (symbol) {
+  // //   y = 0 - y;
+  // // }
+  // return y;
+
+  /*********五毒神掌第二遍******/
+  // 采取除10的操作
   let y = 0;
-  let max = Math.pow(2, 31) / 10;
+  let max = (Math.pow(2, 31) - 1) / 10;
   while (x !== 0) {
-    // 按照题意这里需要先判断 @!!!!!!
+    // 检查是否超出
     if (Math.abs(y) > max) {
       return 0;
     }
+
     y = y * 10 + (x % 10);
     x = parseInt(x / 10);
   }
 
-  // if (symbol) {
-  //   y = 0 - y;
-  // }
   return y;
 };
 // @lc code=end

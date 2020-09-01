@@ -21,18 +21,27 @@ var twoSum = function (nums, target) {
   // }
 
   // @2 牺牲空间换时间--构造一个 hash 对象
+  // let hashObj = {};
+  // let nlen = nums.length;
+  // for (let i = 0; i < nlen; i++) {
+  //   hashObj[nums[i]] = i;
+  // }
+  // for (let i = 0; i < nlen; i++) {
+  //   let val = hashObj[target - nums[i]];
+  //   if (val >= 0 && val !== i) {
+  //     return [i, val];
+  //   }
+  // }
+
+  /*****五毒神掌第二遍 */
+  // 不考虑时间复杂度较高的算法，对数组构造 hash
   let hashObj = {};
-  let nlen = nums.length;
-  for (let i = 0; i < nlen; i++) {
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let result = target - nums[i];
+    if (hashObj[result] >= 0) {
+      return [hashObj[result], i];
+    }
     hashObj[nums[i]] = i;
   }
-  for (let i = 0; i < nlen; i++) {
-    let val = hashObj[target - nums[i]];
-    if (val >= 0 && val !== i) {
-      return [i, val];
-    }
-  }
-
-  return null;
 };
 // @lc code=end
