@@ -29,14 +29,26 @@ var threeSum = function (nums) {
       let sum = nums[i] + nums[L] + nums[R];
       if (sum < 0) {
         // 左边的值小, L指针需要右移
-        while (nums[L] === nums[++L]) {}
+        while (L < R && nums[L] === nums[L + 1]) {
+          L++;
+        }
+        L++;
       } else if (sum > 0) {
         // 右边值大, R指针需要左移
-        while (nums[R] === nums[--R]) {}
+        while (L < R && nums[R] === nums[R - 1]) {
+          R--;
+        }
+        R--;
       } else {
         ans.push([nums[i], nums[L], nums[R]]);
-        while (nums[L] === nums[++L]) {}
-        while (nums[R] === nums[--R]) {}
+        while (L < R && nums[L] === nums[L + 1]) {
+          L++;
+        }
+        L++;
+        while (L < R && nums[R] === nums[R - 1]) {
+          R--;
+        }
+        R--;
       }
     }
   }
