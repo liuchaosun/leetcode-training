@@ -29,24 +29,53 @@ var isPalindrome = function (x) {
   // return true;
   // @2 不用字符串--数字翻转一遍看与原值是否相等
   // 这里有两个需要注意的问题是回文数的话数字是正常的，不是回文数翻转之后有溢出的可能
+  // if (x < 0) {
+  //   return false;
+  // }
+  // let y = 0,
+  //   x0 = x;
+  // while (x !== 0) {
+  //   // 不是回文数可能会溢出
+  //   if (y > Number.MAX_SAFE_INTEGER / 10) {
+  //     return false;
+  //   }
+  //   y = y * 10 + (x % 10);
+  //   x = x / 10;
+  //   if (x < 1) {
+  //     x = 0;
+  //   } else {
+  //     x = parseInt(x);
+  //   }
+  // }
+  // return y === x0;
+
+  /***********五毒神掌第二遍**********/
+  // 理解题意：回文要左右读一致，所以小于0的数字肯定不是
+  // 简单的解法可以把数字翻转然后跟原值比较
+  // 比较好的解法是 可以采取双指针
   if (x < 0) {
     return false;
   }
-  let y = 0,
-    x0 = x;
-  while (x !== 0) {
-    // 不是回文数可能会溢出
-    if (y > Number.MAX_SAFE_INTEGER / 10) {
+  let xStr = x + '';
+  let left = 0;
+  let right = xStr.length - 1;
+  while (left < right) {
+    if (xStr[left] !== xStr[right]) {
       return false;
     }
-    y = y * 10 + (x % 10);
-    x = x / 10;
-    if (x < 1) {
-      x = 0;
-    } else {
-      x = parseInt(x);
-    }
+    left++;
+    right--;
   }
-  return y === x0;
+
+  return true;
 };
+
+/**
+ * 测试用例
+ * 12221
+ * -121
+ * -1
+ * 0
+ * 122
+ */
 // @lc code=end
