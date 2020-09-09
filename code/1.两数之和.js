@@ -47,15 +47,25 @@ var twoSum = function (nums, target) {
   /*****五毒神掌第三遍 */
   // 分析题意：在数组中，找出两个符合目标的数据，目标是相加之和为 target，输出数据在数组中的索引
   // 根据题意，输出的是索引而不是值，所以在构造 hash 的时候要保存索引
+  // let hashObj = {};
+  // // 遍历数据，检查是否满足条件，不满足则保存该数据
+  // for (let i = 0, len = nums.length; i < len; i++) {
+  //   let value = target - nums[i];
+  //   if (hashObj[value] !== void 0) {
+  //     // 输出索引
+  //     return [hashObj[value], i];
+  //   }
+  //   // 保存当前值索引，构造 hash
+  //   hashObj[nums[i]] = i;
+  // }
+
+  /********第四遍 构造hash ****** */
   let hashObj = {};
-  // 遍历数据，检查是否满足条件，不满足则保存该数据
   for (let i = 0, len = nums.length; i < len; i++) {
-    let value = target - nums[i];
-    if (hashObj[value] !== void 0) {
-      // 输出索引
-      return [hashObj[value], i];
+    let dif = target - nums[i];
+    if (hashObj[dif] !== void 0) {
+      return [hashObj[dif], i];
     }
-    // 保存当前值索引，构造 hash
     hashObj[nums[i]] = i;
   }
 };
