@@ -30,13 +30,31 @@ var maxArea = function (height) {
   // return maxVal;
   // 第二种解法: 从左右两边的边界向中间进行收敛,这样的宽度越来越窄,那么想要面积更大就需要
   // 高度更高,因此在收敛的时候就需要高度较矮的柱子收敛
+  // let maxVal = 0;
+  // for (let left = 0, right = height.length - 1; left < right; ) {
+  //   let area = (right - left) * (height[left] <= height[right] ? height[left++] : height[right--]);
+  //   if (area > maxVal) {
+  //     maxVal = area;
+  //   }
+  // }
+  // return maxVal;
+
+  /**
+   * 五毒神掌第二遍
+   * 短柱子决定高度，两个柱子之间的差决定宽度
+   * 只记得是双指针夹逼，不记得具体写法
+   */
   let maxVal = 0;
-  for (let left = 0, right = height.length - 1; left < right; ) {
-    let area = (right - left) * (height[left] <= height[right] ? height[left++] : height[right--]);
-    if (area > maxVal) {
-      maxVal = area;
+  let len = height.length;
+  let left = 0;
+  let right = len - 1;
+  while (left < right) {
+    let total = (right - left) * (height[left] < height[right] ? height[left++] : height[right--]);
+    if (total > maxVal) {
+      maxVal = total;
     }
   }
+
   return maxVal;
 };
 // @lc code=end

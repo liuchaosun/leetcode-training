@@ -29,15 +29,33 @@ var moveZeroes = function (nums) {
   // }
 
   // 解法2 双指针法--经过阅读外网题解发现，此解即是最优解
-  if (nums == null || nums.length == 0) return;
-  for (let i = 0, j = 0, len = nums.length; i < len; i++) {
-    if (nums[i]) {
-      if (i !== j) {
-        nums[j] = nums[i];
-        nums[i] = 0;
+  // if (nums == null || nums.length == 0) return;
+  // for (let i = 0, j = 0, len = nums.length; i < len; i++) {
+  //   if (nums[i]) {
+  //     if (i !== j) {
+  //       nums[j] = nums[i];
+  //       nums[i] = 0;
+  //     }
+  //     j++;
+  //   }
+  // }
+
+  /**
+   * 五毒神掌第二遍
+   * 脑海里只记得这题是双指针解的
+   */
+  if (nums === null || nums.length === 0) {
+    return;
+  }
+  for (let slow = 0, fast = 0, len = nums.length; fast < len; ) {
+    if (nums[fast] !== 0) {
+      if (slow !== fast) {
+        nums[slow] = nums[fast];
+        nums[fast] = 0;
       }
-      j++;
+      slow++;
     }
+    fast++;
   }
 };
 // @lc code=end
