@@ -44,10 +44,25 @@ var moveZeroes = function (nums) {
    * 五毒神掌第二遍
    * 脑海里只记得这题是双指针解的
    */
+  // if (nums === null || nums.length === 0) {
+  //   return;
+  // }
+  // for (let slow = 0, fast = 0, len = nums.length; fast < len; ) {
+  //   if (nums[fast] !== 0) {
+  //     if (slow !== fast) {
+  //       nums[slow] = nums[fast];
+  //       nums[fast] = 0;
+  //     }
+  //     slow++;
+  //   }
+  //   fast++;
+  // }
+
+  // 第三遍 快慢指针
   if (nums === null || nums.length === 0) {
     return;
   }
-  for (let slow = 0, fast = 0, len = nums.length; fast < len; ) {
+  for (let slow = 0, fast = 0, len = nums.length; fast < len; fast++) {
     if (nums[fast] !== 0) {
       if (slow !== fast) {
         nums[slow] = nums[fast];
@@ -55,7 +70,6 @@ var moveZeroes = function (nums) {
       }
       slow++;
     }
-    fast++;
   }
 };
 // @lc code=end

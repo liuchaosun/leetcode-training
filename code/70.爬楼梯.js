@@ -38,6 +38,15 @@ var climbStairs = function (n) {
    * 而到达 n - 2 层也有两种可能
    * 所以可得公式 f(n) = f(n-1)+ f(n-2)
    */
+  // let f1 = 1;
+  // let f2 = 1;
+  // for (let i = 2; i <= n; i++) {
+  //   f1 = (f2 += f1) - f1;
+  // }
+  // return f2;
+
+  // 第三遍 不用递归用循环，保留前面的计算结果
+  // 动态规划？ 光头哥牛皮
   let f1 = 1;
   let f2 = 1;
   for (let i = 2; i <= n; i++) {

@@ -38,23 +38,35 @@ var maxArea = function (height) {
   //   }
   // }
   // return maxVal;
-
   /**
    * 五毒神掌第二遍
    * 短柱子决定高度，两个柱子之间的差决定宽度
    * 只记得是双指针夹逼，不记得具体写法
    */
-  let maxVal = 0;
-  let len = height.length;
-  let left = 0;
-  let right = len - 1;
-  while (left < right) {
-    let total = (right - left) * (height[left] < height[right] ? height[left++] : height[right--]);
-    if (total > maxVal) {
-      maxVal = total;
+  // let maxVal = 0;
+  // let len = height.length;
+  // let left = 0;
+  // let right = len - 1;
+  // while (left < right) {
+  //   let total = (right - left) * (height[left] < height[right] ? height[left++] : height[right--]);
+  //   if (total > maxVal) {
+  //     maxVal = total;
+  //   }
+  // }
+  // return maxVal;
+
+  // 第三遍 左右边界
+  let maxV = 0;
+  let L = 0;
+  let R = height.length - 1;
+
+  while (L < R) {
+    let total = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
+    if (total > maxV) {
+      maxV = total;
     }
   }
 
-  return maxVal;
+  return maxV;
 };
 // @lc code=end

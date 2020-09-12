@@ -61,37 +61,68 @@ var threeSum = function (nums) {
    * 找所有结果需要遍历
    * 结合遍历+去重，进行排序是最佳方案
    */
-  if (!nums || nums.length < 3) {
-    return [];
-  }
+  // if (!nums || nums.length < 3) {
+  //   return [];
+  // }
+  // let ans = [];
+  // nums.sort((a, b) => a - b); // O(nlogn)
+  // for (let i = 0, len = nums.length; i < len; i++) {
+  //   // 排序后，左边最小不能大于目标数字
+  //   if (nums[i] > 0) {
+  //     return ans;
+  //   }
+  //   // 去重
+  //   if (i === 0 || nums[i] !== nums[i - 1]) {
+  //     let L = i + 1;
+  //     let R = len - 1;
+  //     while (L < R) {
+  //       let sum = nums[i] + nums[L] + nums[R];
+  //       if (sum < 0) {
+  //         // 左边小： 右移 + 越过相同
+  //         while (L <= R && nums[L] === nums[++L]) {}
+  //       } else if (sum > 0) {
+  //         // 右边大： 左移 + 越过相同
+  //         while (L <= R && nums[R] === nums[--R]) {}
+  //       } else {
+  //         ans.push([nums[i], nums[L], nums[R]]);
+  //         while (L <= R && nums[L] === nums[++L]) {}
+  //         while (L <= R && nums[R] === nums[--R]) {}
+  //       }
+  //     }
+  //   }
+  // }
+
+  // return ans;
+
+  // 第三遍
+  // 1. 不能重复，不关心顺序--排序可以帮助去重
+  // 2. 降低复杂度，改为固定一个数，找另外两个数的和为当前的数的负值
   let ans = [];
-  nums.sort((a, b) => a - b); // O(nlogn)
+  nums.sort((a, b) => a - b);
   for (let i = 0, len = nums.length; i < len; i++) {
-    // 排序后，左边最小不能大于目标数字
     if (nums[i] > 0) {
       return ans;
     }
     // 去重
-    if (i === 0 || nums[i] !== nums[i - 1]) {
-      let L = i + 1;
-      let R = len - 1;
-      while (L < R) {
-        let sum = nums[i] + nums[L] + nums[R];
-        if (sum < 0) {
-          // 左边小： 右移 + 越过相同
-          while (L <= R && nums[L] === nums[++L]) {}
-        } else if (sum > 0) {
-          // 右边大： 左移 + 越过相同
-          while (L <= R && nums[R] === nums[--R]) {}
-        } else {
-          ans.push([nums[i], nums[L], nums[R]]);
-          while (L <= R && nums[L] === nums[++L]) {}
-          while (L <= R && nums[R] === nums[--R]) {}
-        }
+    if (i > 0 && nums[i] === nums[i - 1]) {
+      continue;
+    }
+    // 左右双指针
+    let L = i + 1;
+    let R = len - 1;
+    while (L < R) {
+      let total = nums[i] + nums[L] + nums[R];
+      if (total < 0) {
+        while (L <= R && nums[L] === nums[++L]) {}
+      } else if (total === 0) {
+        ans.push([nums[i], nums[L], nums[R]]);
+        while (L <= R && nums[L] === nums[++L]) {}
+        while (L <= R && nums[R] === nums[--R]) {}
+      } else {
+        while (L <= R && nums[R] === nums[--R]) {}
       }
     }
   }
-
   return ans;
 };
 // @lc code=end
