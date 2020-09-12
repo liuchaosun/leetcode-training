@@ -10,19 +10,17 @@
  * @return {number}
  * 此题关键在于不对原始数据的长度进行修改，而是将前若干位的数据值修改，
  * 最后通过返回的长度进行截取数据
- * 此题需要使用双指针法解: i是慢指针 j是快指针
+ * 此题需要使用双指针法解
  */
 var removeDuplicates = function (nums) {
+  // 双指针
   if (nums.length === 0) return 0;
-  let i = 0;
-  for (let j = 1; j < nums.length; j++) {
-    if (nums[i] !== nums[j]) {
-      // 如果不相等,i后移一位，将 j 位置的值赋值给新的i位置
-      i++;
-      nums[i] = nums[j];
+  let L = 0;
+  for (let R = L + 1, len = nums.length; R < len; R++) {
+    if (nums[L] !== nums[R]) {
+      nums[++L] = nums[R];
     }
   }
-
-  return i + 1;
+  return L + 1;
 };
 // @lc code=end
