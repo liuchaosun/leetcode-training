@@ -25,7 +25,24 @@ var transpose = function (A) {
   //   }
   // }
   // return ans;
+
   // 国际站上的解法---人被秀傻了
-  return A[0].map((_, i) => A.map((b) => b[i]));
+  // return A[0].map((_, i) => A.map((b) => b[i]));
+
+  // 第二遍
+  if (!A || A.length < 1 || A[0].length < 1) {
+    return A || [];
+  }
+  let ans = [];
+  let xlen = A[0].length;
+  for (let i = 0; i < xlen; i++) {
+    ans.push([]);
+  }
+  for (let i = 0; i < xlen; i++) {
+    for (let j = 0; j < A.length; j++) {
+      ans[i][j] = A[j][i];
+    }
+  }
+  return ans;
 };
 // @lc code=end
