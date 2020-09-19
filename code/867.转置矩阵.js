@@ -30,19 +30,26 @@ var transpose = function (A) {
   // return A[0].map((_, i) => A.map((b) => b[i]));
 
   // 第二遍
-  if (!A || A.length < 1 || A[0].length < 1) {
-    return A || [];
+  // if (!A || A.length < 1 || A[0].length < 1) {
+  //   return A || [];
+  // }
+  // let ans = [];
+  // let xlen = A[0].length;
+  // for (let i = 0; i < xlen; i++) {
+  //   ans.push([]);
+  // }
+  // for (let i = 0; i < xlen; i++) {
+  //   for (let j = 0; j < A.length; j++) {
+  //     ans[i][j] = A[j][i];
+  //   }
+  // }
+  // return ans;
+
+  // 第三遍： 转置矩阵 --> 交换矩阵的行索引与列索引
+  if (A.length < 1 || A[0].length < 1) {
+    return A;
   }
-  let ans = [];
-  let xlen = A[0].length;
-  for (let i = 0; i < xlen; i++) {
-    ans.push([]);
-  }
-  for (let i = 0; i < xlen; i++) {
-    for (let j = 0; j < A.length; j++) {
-      ans[i][j] = A[j][i];
-    }
-  }
-  return ans;
+
+  return A[0].map((_a, x) => A.map((a) => a[x]));
 };
 // @lc code=end

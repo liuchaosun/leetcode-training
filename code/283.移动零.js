@@ -59,16 +59,32 @@ var moveZeroes = function (nums) {
   // }
 
   // 第三遍 快慢指针
+  // if (nums === null || nums.length === 0) {
+  //   return;
+  // }
+  // for (let slow = 0, fast = 0, len = nums.length; fast < len; fast++) {
+  //   if (nums[fast] !== 0) {
+  //     if (slow !== fast) {
+  //       nums[slow] = nums[fast];
+  //       nums[fast] = 0;
+  //     }
+  //     slow++;
+  //   }
+  // }
+
+  // 第四遍 双指针
   if (nums === null || nums.length === 0) {
     return;
   }
-  for (let slow = 0, fast = 0, len = nums.length; fast < len; fast++) {
+  // slow 一直指向 0 的位置
+  for (let slow = 0, fast = 0; fast < nums.length; fast++) {
     if (nums[fast] !== 0) {
       if (slow !== fast) {
-        nums[slow] = nums[fast];
+        nums[slow++] = nums[fast];
         nums[fast] = 0;
+      } else {
+        slow++;
       }
-      slow++;
     }
   }
 };

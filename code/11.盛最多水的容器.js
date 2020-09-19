@@ -56,17 +56,32 @@ var maxArea = function (height) {
   // return maxVal;
 
   // 第三遍 左右边界
+  // let maxV = 0;
+  // let L = 0;
+  // let R = height.length - 1;
+
+  // while (L < R) {
+  //   let total = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
+  //   if (total > maxV) {
+  //     maxV = total;
+  //   }
+  // }
+
+  // return maxV;
+
+  // 第四遍
+  // 矩形面积= 宽 × 高
+  // 最大面积= 最大宽 × 最大高
+  // 从最大宽开始慢慢减小找最值
   let maxV = 0;
   let L = 0;
   let R = height.length - 1;
-
   while (L < R) {
-    let total = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
-    if (total > maxV) {
-      maxV = total;
+    let tt = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
+    if (tt > maxV) {
+      maxV = tt;
     }
   }
-
   return maxV;
 };
 // @lc code=end

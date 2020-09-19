@@ -18,11 +18,9 @@ var threeSum = function (nums) {
   // const len = nums.length;
   // if (len < 3) return ans;
   // nums.sort((a, b) => a - b); // 时间复杂度 O(nlogn)
-
   // for (let i = 0; i < len; i++) {
   //   if (nums[i] > 0) return ans; //大于0一定不满足
   //   if (i > 0 && nums[i] === nums[i - 1]) continue; // 去重
-
   //   let L = i + 1;
   //   let R = len - 1;
   //   while (L < R) {
@@ -52,9 +50,7 @@ var threeSum = function (nums) {
   //     }
   //   }
   // }
-
   // return ans;
-
   /**
    * 五毒第二遍
    * 三元组不能重复所以需要去重--这个是关键
@@ -91,15 +87,47 @@ var threeSum = function (nums) {
   //     }
   //   }
   // }
-
   // return ans;
-
   // 第三遍
   // 1. 不能重复，不关心顺序--排序可以帮助去重
   // 2. 降低复杂度，改为固定一个数，找另外两个数的和为当前的数的负值
+  // let ans = [];
+  // nums.sort((a, b) => a - b);
+  // for (let i = 0, len = nums.length; i < len; i++) {
+  //   if (nums[i] > 0) {
+  //     return ans;
+  //   }
+  //   // 去重
+  //   if (i > 0 && nums[i] === nums[i - 1]) {
+  //     continue;
+  //   }
+  //   // 左右双指针
+  //   let L = i + 1;
+  //   let R = len - 1;
+  //   while (L < R) {
+  //     let total = nums[i] + nums[L] + nums[R];
+  //     if (total < 0) {
+  //       while (L <= R && nums[L] === nums[++L]) {}
+  //     } else if (total === 0) {
+  //       ans.push([nums[i], nums[L], nums[R]]);
+  //       while (L <= R && nums[L] === nums[++L]) {}
+  //       while (L <= R && nums[R] === nums[--R]) {}
+  //     } else {
+  //       while (L <= R && nums[R] === nums[--R]) {}
+  //     }
+  //   }
+  // }
+  // return ans;
+  // 第四遍
+  // 固定一个数，然后双指针
   let ans = [];
-  nums.sort((a, b) => a - b);
-  for (let i = 0, len = nums.length; i < len; i++) {
+  if (nums.length < 3) {
+    return [];
+  }
+  // 元组不在乎顺序，可以先排序
+  nums.sort((a, b) => a - b); // nlogn
+  for (let i = 0; i < nums.length; i++) {
+    // 边界
     if (nums[i] > 0) {
       return ans;
     }
@@ -107,14 +135,15 @@ var threeSum = function (nums) {
     if (i > 0 && nums[i] === nums[i - 1]) {
       continue;
     }
-    // 左右双指针
+
     let L = i + 1;
-    let R = len - 1;
+    let R = nums.length - 1;
+
     while (L < R) {
-      let total = nums[i] + nums[L] + nums[R];
-      if (total < 0) {
-        while (L <= R && nums[L] === nums[++L]) {}
-      } else if (total === 0) {
+      let sum = nums[i] + nums[L] + nums[R];
+      if (sum < 0) {
+        while (L <= R && nums[L] === nums[++L]) {} // 去重
+      } else if (sum === 0) {
         ans.push([nums[i], nums[L], nums[R]]);
         while (L <= R && nums[L] === nums[++L]) {}
         while (L <= R && nums[R] === nums[--R]) {}
@@ -123,6 +152,7 @@ var threeSum = function (nums) {
       }
     }
   }
+
   return ans;
 };
 // @lc code=end
