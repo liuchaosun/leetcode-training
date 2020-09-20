@@ -14,13 +14,23 @@
  */
 var removeDuplicates = function (nums) {
   // 双指针
+  // if (nums.length === 0) return 0;
+  // let L = 0;
+  // for (let R = L + 1, len = nums.length; R < len; R++) {
+  //   if (nums[L] !== nums[R]) {
+  //     nums[++L] = nums[R];
+  //   }
+  // }
+  // return L + 1;
+
+  // 第二遍--原地改值，用双指针
   if (nums.length === 0) return 0;
-  let L = 0;
-  for (let R = L + 1, len = nums.length; R < len; R++) {
-    if (nums[L] !== nums[R]) {
-      nums[++L] = nums[R];
+  let slow = 0;
+  for (let fast = 1; fast < nums.length; fast++) {
+    if (nums[slow] !== nums[fast] && ++slow !== fast) {
+      nums[slow] = nums[fast];
     }
   }
-  return L + 1;
+  return slow + 1;
 };
 // @lc code=end
