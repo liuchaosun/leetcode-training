@@ -26,20 +26,20 @@ var generate = function (numRows) {
   // }
   // return ans;
 
-  // 第二遍--注意题目的坑，非负整数包括0
+  // 第二遍 错位相加
   if (numRows === 0) {
     return [];
   }
   let ans = [[1]];
   for (let i = 1; i < numRows; i++) {
-    let row = [1];
-    let preRow = ans[i - 1]; //上一层
-    // 注意这里的临界值--每一层的数量与层数有关
-    for (let j = 1; j < i; j++) {
-      row.push(preRow[j - 1], preRow[j]);
+    let pre = ans[i - 1];
+    let preR = [...pre, 0];
+    let preL = [0, ...pre];
+    let n = [];
+    for (let j = 0; j < preR.length; j++) {
+      n.push(preR[j] + preL[j]);
     }
-    row.push(1);
-    ans.push(row);
+    ans.push(n);
   }
   return ans;
 };

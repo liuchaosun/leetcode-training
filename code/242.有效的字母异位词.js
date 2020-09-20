@@ -10,67 +10,90 @@
  * @param {string} t
  * @return {boolean}
  */
+
+let sortString = function (str) {
+  return str
+    .split('')
+    .sort((a, b) => a.charCodeAt() - b.charCodeAt())
+    .join('');
+};
+
+// 切题四件套
+// 1. 确定题意-->是否大小写模糊
+// 2. 想出可能的解法-->从中选择
+// 3. codeing
+// 4. test
+
 var isAnagram = function (s, t) {
-  // 第一遍--直接想到的解法，存在冗余
-  // if (s.length !== t.length) {
+  // 可能的解法:
+  // 1. 两个字符串都排序一次，然后判断是否相等
+  // 2. hash 表记录字母出现的次数
+  // 3. 数组记录字母的次数
+
+  // 1
+  // if (typeof s !== 'string' || typeof t !== 'string') {
   //   return false;
   // }
-  // // 用长度为26的数组存储
-  // let wordArr = [];
-  // for (let i = 0; i < s.length; i++) {
-  //   let code = s[i].charCodeAt() - 'a'.charCodeAt();
-  //   if (wordArr[code] !== void 0) {
-  //     wordArr[code]++;
+  // if (s === t) {
+  //   return true;
+  // }
+  // if (sortString(s) !== sortString(t)) {
+  //   return false;
+  // }
+  // return true;
+
+  // 2
+  // if (typeof s !== 'string' || typeof t !== 'string') return false;
+  // if (s.length !== t.length) return false;
+  // if (s === t) return true;
+
+  // let HashMap = Object.create(null);
+  // for (let i of s) {
+  //   if (HashMap[i] !== undefined) {
+  //     HashMap[i]++;
   //   } else {
-  //     wordArr[code] = 1;
+  //     HashMap[i] = 1;
   //   }
   // }
-  // for (let i = 0; i < t.length; i++) {
-  //   let code = t[i].charCodeAt() - 'a'.charCodeAt();
-  //   if (!wordArr[code]) {
-  //     return false;
-  //   }
-  //   wordArr[code]--;
-  //   if (wordArr[code] === -1) {
-  //     return false;
-  //   }
-  // }
-  // return wordArr.filter((i) => i > 0).length ? false : true;
 
-  // 解法1变换，优化一下代码逻辑
-  // if (s.length !== t.length) {
-  //   return false;
+  // for (let i of t) {
+  //   if (!HashMap[i]) {
+  //     return false;
+  //   } else {
+  //     HashMap[i]--;
+  //   }
   // }
-  // let wordArr = Array(26).fill(0);
-  // for (let i = 0; i < s.length; i++) {
-  //   let a_code = 'a'.charCodeAt();
-  //   wordArr[s[i].charCodeAt() - a_code]++;
-  //   wordArr[t[i].charCodeAt() - a_code]--;
-  // }
-  // return wordArr.filter((i) => i !== 0).length ? false : true;
 
-  // 解法1再变幻--hash
-  if (s.length !== t.length) {
-    return false;
-  }
-  //构造一个hash
-  let wordHash = {};
-  for (let i = 0; i < s.length; i++) {
-    wordHash[s[i]] ? wordHash[s[i]]++ : (wordHash[s[i]] = 1);
-  }
-  // 检查 hash
-  for (let i = 0; i < t.length; i++) {
-    if (!wordHash[t[i]]) {
-      // 不存在直接结束
-      return false;
-    }
-    wordHash[t[i]]--;
-    // 存在数量不同
-    if (wordHash[t[i]] < 0) {
-      return false;
+  // return true;
+
+  // 3
+  if (typeof s !== 'string' || typeof t !== 'string') return false;
+  if (s.length !== t.length) return false;
+  if (s === t) return true;
+  // ASCII 的值是0到255，最大256 用数组比较好 -- 可以优化成长度为 26 的数组
+  let ASCIIArray = [];
+  for (let i = 0, len = s.length; i < len; i++) {
+    let charcode = s[i].charCodeAt();
+    if (ASCIIArray[charcode] !== undefined) {
+      ASCIIArray[charcode]++;
+    } else {
+      ASCIIArray[charcode] = 1;
     }
   }
-  // 数量相同，字母种类相同，到这里的肯定为真
+  for (let i = 0, len = t.length; i < len; i++) {
+    let charcode = t[i].charCodeAt();
+    if (!ASCIIArray[charcode]) {
+      return false;
+    } else {
+      ASCIIArray[charcode]--;
+    }
+  }
   return true;
 };
 // @lc code=end
+
+// 测试用例
+// 1. 不是数字
+// 2. " " and " "
+// 3. "" and ""
+// 4. "a" and "ab"
