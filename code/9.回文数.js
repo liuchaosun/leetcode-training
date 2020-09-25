@@ -53,21 +53,48 @@ var isPalindrome = function (x) {
   // 理解题意：回文要左右读一致，所以小于0的数字肯定不是
   // 简单的解法可以把数字翻转然后跟原值比较
   // 比较好的解法是 可以采取双指针
+  // if (x < 0) {
+  //   return false;
+  // }
+  // let xStr = x + '';
+  // let left = 0;
+  // let right = xStr.length - 1;
+  // while (left < right) {
+  //   if (xStr[left] !== xStr[right]) {
+  //     return false;
+  //   }
+  //   left++;
+  //   right--;
+  // }
+
+  // return true;
+
+  // 第三遍
+  // 数字转为字符串，使用双指针
+  // if (x < 0) {
+  //   return false;
+  // }
+  // let xStr = x + '';
+  // for (let l = 0, r = xStr.length - 1; l < r; l++, r--) {
+  //   if (xStr[l] !== xStr[r]) {
+  //     return false;
+  //   }
+  // }
+  // return true;
+  // 不转为字符串的方式，倒转数字跟原值对比
   if (x < 0) {
     return false;
   }
-  let xStr = x + '';
-  let left = 0;
-  let right = xStr.length - 1;
-  while (left < right) {
-    if (xStr[left] !== xStr[right]) {
+  let xCopy = x;
+  let y = 0;
+  while (x !== 0) {
+    if (y > Number.MAX_SAFE_INTEGER / 10) {
       return false;
     }
-    left++;
-    right--;
+    y = y * 10 + (x % 10);
+    x = parseInt(x / 10);
   }
-
-  return true;
+  return y === xCopy;
 };
 
 /**

@@ -60,13 +60,24 @@ var twoSum = function (nums, target) {
   // }
 
   /********第四遍 构造hash ****** */
-  let hashObj = {};
+  // let hashObj = {};
+  // for (let i = 0, len = nums.length; i < len; i++) {
+  //   let dif = target - nums[i];
+  //   if (hashObj[dif] !== void 0) {
+  //     return [hashObj[dif], i];
+  //   }
+  //   hashObj[nums[i]] = i;
+  // }
+
+  // 第五遍
+  // 构造 hash
+  let hashMap = {};
   for (let i = 0, len = nums.length; i < len; i++) {
-    let dif = target - nums[i];
-    if (hashObj[dif] !== void 0) {
-      return [hashObj[dif], i];
+    let ans = target - nums[i];
+    if (hashMap[ans] !== void 0) {
+      return [hashMap[ans], i];
     }
-    hashObj[nums[i]] = i;
+    hashMap[nums[i]] = i;
   }
 };
 

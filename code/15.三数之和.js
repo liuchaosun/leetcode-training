@@ -120,35 +120,61 @@ var threeSum = function (nums) {
   // return ans;
   // 第四遍
   // 固定一个数，然后双指针
+  // let ans = [];
+  // if (nums.length < 3) {
+  //   return [];
+  // }
+  // // 元组不在乎顺序，可以先排序
+  // nums.sort((a, b) => a - b); // nlogn
+  // for (let i = 0; i < nums.length; i++) {
+  //   // 边界
+  //   if (nums[i] > 0) {
+  //     return ans;
+  //   }
+  //   // 去重
+  //   if (i > 0 && nums[i] === nums[i - 1]) {
+  //     continue;
+  //   }
+
+  //   let L = i + 1;
+  //   let R = nums.length - 1;
+
+  //   while (L < R) {
+  //     let sum = nums[i] + nums[L] + nums[R];
+  //     if (sum < 0) {
+  //       while (L <= R && nums[L] === nums[++L]) {} // 去重
+  //     } else if (sum === 0) {
+  //       ans.push([nums[i], nums[L], nums[R]]);
+  //       while (L <= R && nums[L] === nums[++L]) {}
+  //       while (L <= R && nums[R] === nums[--R]) {}
+  //     } else {
+  //       while (L <= R && nums[R] === nums[--R]) {}
+  //     }
+  //   }
+  // }
+
+  // return ans;
+
+  // 第五遍
+  // 要去重并且不要求顺序可以排序
   let ans = [];
-  if (nums.length < 3) {
-    return [];
-  }
-  // 元组不在乎顺序，可以先排序
-  nums.sort((a, b) => a - b); // nlogn
-  for (let i = 0; i < nums.length; i++) {
-    // 边界
-    if (nums[i] > 0) {
-      return ans;
-    }
-    // 去重
+  nums.sort((a, b) => a - b); // O(nlogn)
+  for (let i = 0, len = nums.length; i < len; i++) {
     if (i > 0 && nums[i] === nums[i - 1]) {
       continue;
     }
-
-    let L = i + 1;
-    let R = nums.length - 1;
-
-    while (L < R) {
-      let sum = nums[i] + nums[L] + nums[R];
-      if (sum < 0) {
-        while (L <= R && nums[L] === nums[++L]) {} // 去重
-      } else if (sum === 0) {
-        ans.push([nums[i], nums[L], nums[R]]);
-        while (L <= R && nums[L] === nums[++L]) {}
-        while (L <= R && nums[R] === nums[--R]) {}
+    let l = i + 1;
+    let r = nums.length - 1;
+    while (l < r) {
+      let t = nums[i] + nums[l] + nums[r];
+      if (t < 0) {
+        while (l <= r && nums[l] === nums[++l]) {}
+      } else if (t === 0) {
+        ans.push([nums[i], nums[l], nums[r]]);
+        while (l <= r && nums[l] === nums[++l]) {}
+        while (l <= r && nums[r] === nums[--r]) {}
       } else {
-        while (L <= R && nums[R] === nums[--R]) {}
+        while (l <= r && nums[r] === nums[--r]) {}
       }
     }
   }

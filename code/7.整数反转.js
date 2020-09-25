@@ -39,18 +39,31 @@ var reverse = function (x) {
 
   /*********五毒神掌第二遍******/
   // 采取除10的操作
+  // let y = 0;
+  // let max = (Math.pow(2, 31) - 1) / 10;
+  // while (x !== 0) {
+  //   // 检查是否超出
+  //   if (Math.abs(y) > max) {
+  //     return 0;
+  //   }
+
+  //   y = y * 10 + (x % 10);
+  //   x = parseInt(x / 10);
+  // }
+
+  // return y;
+
+  // 第三遍
   let y = 0;
   let max = (Math.pow(2, 31) - 1) / 10;
   while (x !== 0) {
-    // 检查是否超出
     if (Math.abs(y) > max) {
       return 0;
     }
-
     y = y * 10 + (x % 10);
+
     x = parseInt(x / 10);
   }
-
   return y;
 };
 // @lc code=end

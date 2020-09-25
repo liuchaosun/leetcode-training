@@ -73,13 +73,23 @@ var maxArea = function (height) {
   // 矩形面积= 宽 × 高
   // 最大面积= 最大宽 × 最大高
   // 从最大宽开始慢慢减小找最值
+  // let maxV = 0;
+  // let L = 0;
+  // let R = height.length - 1;
+  // while (L < R) {
+  //   let tt = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
+  //   if (tt > maxV) {
+  //     maxV = tt;
+  //   }
+  // }
+  // return maxV;
+
+  // 第五遍 面积 = 宽 × 高
   let maxV = 0;
-  let L = 0;
-  let R = height.length - 1;
-  while (L < R) {
-    let tt = (R - L) * (height[L] <= height[R] ? height[L++] : height[R--]);
-    if (tt > maxV) {
-      maxV = tt;
+  for (let l = 0, r = height.length - 1; l < r; ) {
+    let area = (r - l) * (height[l] <= height[r] ? height[l++] : height[r--]);
+    if (area > maxV) {
+      maxV = area;
     }
   }
   return maxV;
