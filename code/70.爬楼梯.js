@@ -55,11 +55,30 @@ var climbStairs = function (n) {
   // return f2;
 
   // 第四遍 动态规划
-  let f1 = 1;
-  let f2 = 1;
-  for (let i = 2; i <= n; i++) {
-    f1 = (f2 += f1) - f1;
-  }
-  return f2;
+  // let f1 = 1;
+  // let f2 = 1;
+  // for (let i = 2; i <= n; i++) {
+  //   f1 = (f2 += f1) - f1;
+  // }
+  // return f2;
+
+  // 第五遍 使用递归的方式解决问题
+  // 由于最简单的递归会超时，这里加一个缓存
+  let fn = [0];
+  var climb = function (step) {
+    if (fn[step]) {
+      return fn[step];
+    }
+    // 递归终结条件
+    if (step <= 2) {
+      fn[step] = step;
+      return step;
+    }
+    // 处理当前问题,进入下一层
+    let rl = climb(step - 1) + climb(step - 2);
+    fn[step] = rl;
+    return rl;
+  };
+  return climb(n);
 };
 // @lc code=end
