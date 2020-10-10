@@ -28,4 +28,6 @@
   // 文件移动时默认更新文件路径
   "javascript.updateImportsOnFileMove.enabled": "always",
   "git.autofetch": true,
+  "fileheader.Author": "liuchaosun",
+  "fileheader.LastModifiedBy": "liuchaosun"
 }

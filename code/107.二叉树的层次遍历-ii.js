@@ -1,0 +1,51 @@
+/*
+ * @Author: liuchaosun
+ * @Date: 2020-10-10 11:49:24
+ * @Last Modified by: liuchaosun
+ * @Last Modified time: 2020-10-10 11:54:19
+ */
+/*
+ * @lc app=leetcode.cn id=107 lang=javascript
+ *
+ * [107] 二叉树的层次遍历 II
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrderBottom = function (root) {
+  // 解法--BFS 变种
+  // 与 102 题几乎相同的题目,区别在于本题最终使用队列方式存储
+  let resultQueue = [];
+  if (!root) {
+    return resultQueue;
+  }
+  let queue = [root];
+  while (queue.length) {
+    let level = [];
+    for (let i = 0, n = queue.length; i < n; i++) {
+      let node = queue.pop();
+      level.push(node.val);
+      if (node.left) {
+        queue.unshift(node.left);
+      }
+      if (node.right) {
+        queue.unshift(node.right);
+      }
+    }
+    // 队尾入队
+    resultQueue.unshift(level);
+  }
+
+  return resultQueue;
+};
+// @lc code=end
