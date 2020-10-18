@@ -49,27 +49,55 @@ var levelOrder = function (root) {
   // return result;
 
   // 第二遍
-  let result = [];
-  if (!root) {
-    return result;
-  }
+  // let result = [];
+  // if (!root) {
+  //   return result;
+  // }
 
+  // let queue = [root];
+  // while (queue.length) {
+  //   let level = [];
+  //   for (let i = 0, n = queue.length; i < n; i++) {
+  //     let node = queue.pop();
+  //     level.push(node.val);
+  //     if (node.left) {
+  //       queue.unshift(node.left);
+  //     }
+  //     if (node.right) {
+  //       queue.unshift(node.right);
+  //     }
+  //   }
+  //   result.push(level);
+  // }
+
+  // return result;
+
+  // 第三遍
+  let ans = [];
+  if (!root) {
+    return ans;
+  }
   let queue = [root];
   while (queue.length) {
     let level = [];
+    let tmp = [];
     for (let i = 0, n = queue.length; i < n; i++) {
       let node = queue.pop();
       level.push(node.val);
       if (node.left) {
-        queue.unshift(node.left);
+        // 从数组前面插入损耗太大，改为后面插入
+        // queue.unshift(node.left);
+        tmp.push(node.left);
       }
       if (node.right) {
-        queue.unshift(node.right);
+        // queue.unshift(node.right);
+        tmp.push(node.right);
       }
     }
-    result.push(level);
+    queue = tmp.reverse();
+    ans.push(level);
   }
 
-  return result;
+  return ans;
 };
 // @lc code=end

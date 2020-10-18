@@ -49,26 +49,53 @@ var levelOrderBottom = function (root) {
   // return resultQueue;
 
   // 第二遍
+  // if (!root) {
+  //   return [];
+  // }
+  // let result = [];
+  // let queue = [root];
+  // while (queue.length) {
+  //   let level = [];
+  //   for (let i = 0, n = queue.length; i < n; i++) {
+  //     let node = queue.pop();
+  //     level.push(node.val);
+  //     if (node.left) {
+  //       queue.unshift(node.left);
+  //     }
+  //     if (node.right) {
+  //       queue.unshift(node.right);
+  //     }
+  //   }
+  //   // 末尾插入最后在输出的时候进行反转，降低操作的损耗
+  //   result.push(level);
+  // }
+  // return result.reverse();
+
+  // 第三遍
+  let ans = [];
   if (!root) {
-    return [];
+    return ans;
   }
-  let result = [];
   let queue = [root];
   while (queue.length) {
     let level = [];
+    // 添加一个临时数组，用 push 代替 unshift 降低损耗
+    // 最后将 tmp 调转顺序，实现“队列”
+    let tmp = [];
     for (let i = 0, n = queue.length; i < n; i++) {
       let node = queue.pop();
       level.push(node.val);
       if (node.left) {
-        queue.unshift(node.left);
+        tmp.push(node.left);
       }
       if (node.right) {
-        queue.unshift(node.right);
+        tmp.push(node.right);
       }
     }
+    queue = tmp.reverse();
     // 末尾插入最后在输出的时候进行反转，降低操作的损耗
-    result.push(level);
+    ans.push(level);
   }
-  return result.reverse();
+  return ans.reverse();
 };
 // @lc code=end

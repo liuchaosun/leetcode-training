@@ -73,19 +73,39 @@ var moveZeroes = function (nums) {
   // }
 
   // 第四遍 双指针
+  // if (nums === null || nums.length === 0) {
+  //   return;
+  // }
+  // // slow 一直指向 0 的位置
+  // for (let slow = 0, fast = 0; fast < nums.length; fast++) {
+  //   if (nums[fast] !== 0) {
+  //     if (slow !== fast) {
+  //       nums[slow++] = nums[fast];
+  //       nums[fast] = 0;
+  //     } else {
+  //       slow++;
+  //     }
+  //   }
+  // }
+
+  // 第五遍 双指针
   if (nums === null || nums.length === 0) {
     return;
   }
-  // slow 一直指向 0 的位置
-  for (let slow = 0, fast = 0; fast < nums.length; fast++) {
+
+  let slow = 0;
+  let fast = 0;
+  let last = nums.length;
+  while (fast < last) {
+    // 不为0做处理
     if (nums[fast] !== 0) {
       if (slow !== fast) {
-        nums[slow++] = nums[fast];
+        nums[slow] = nums[fast];
         nums[fast] = 0;
-      } else {
-        slow++;
       }
+      slow++;
     }
+    fast++;
   }
 };
 // @lc code=end
