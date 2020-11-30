@@ -28,8 +28,6 @@ var minMutation = function (start, end, bank) {
   for (const iterator of bank) {
     bankHash[iterator] = true;
   }
-  // 保存操作过的值
-  let visited = {};
   while (queue.length) {
     // 这里的逻辑类似于层序遍历
     for (let i = 0, m = queue.length; i < m; i++) {
@@ -40,13 +38,18 @@ var minMutation = function (start, end, bank) {
       let curCopy = cur.split('');
       for (let j = 0, n = curCopy.length; j < n; j++) {
         for (let k = 0, o = gen.length; k < o; k++) {
+          // @优化 相同则跳过
+          if (curCopy[j] === gen[k]) {
+            continue;
+          }
           // 基因改变一次
           curCopy[j] = gen[k];
           let curStr = curCopy.join('');
-          // 判断是否合法+去重
-          if (bankHash[curStr] && !visited[curStr]) {
+          // 判断是否合法
+          if (bankHash[curStr]) {
             queue.unshift(curStr);
-            visited[curStr] = true;
+            // 去重
+            delete bankHash[curStr];
           }
         }
         // 复原，准备改下一个基因
