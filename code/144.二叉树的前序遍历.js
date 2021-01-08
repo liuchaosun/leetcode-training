@@ -18,25 +18,44 @@
  * @return {number[]}
  */
 var preorderTraversal = function (root) {
-  let ans = [];
+  // let ans = [];
 
-  function rec(node) {
-    // 递归终止
-    if (node === null) {
-      return;
-    }
-    ans.push(node.val);
-    // 左遍历
-    if (node.left) {
-      rec(node.left);
-    }
-    // 右遍历
-    if (node.right) {
-      rec(node.right);
-    }
+  // function rec(node) {
+  //   // 递归终止
+  //   if (node === null) {
+  //     return;
+  //   }
+  //   ans.push(node.val);
+  //   // 左遍历
+  //   if (node.left) {
+  //     rec(node.left);
+  //   }
+  //   // 右遍历
+  //   if (node.right) {
+  //     rec(node.right);
+  //   }
+  // }
+
+  // rec(root);
+
+  // return ans;
+
+  // 迭代法
+  let ans = [];
+  if (!root) {
+    return ans;
   }
 
-  rec(root);
+  let stack = [];
+  while (root || stack.length) {
+    while (root) {
+      // ans.push(root.val);
+      stack.push(root);
+      root = root.left;
+    }
+    root = stack.pop();
+    root = root.right;
+  }
 
   return ans;
 };
