@@ -59,15 +59,15 @@ var postorderTraversal = function (root) {
     root = stack.pop();
 
     // root.right === prev  防止处理过的右节点重复进栈
-    // if (root.right === null || root.right === prev) {
-    //   ans.push(root.val);
-    //   prev = root;
-    //   root = null;
-    // } else {
-    //   // 存在右节点根节点需要重新入栈;
-    //   stack.push(root);
-    root = root.right;
-    // }
+    if (root.right === null || root.right === prev) {
+      ans.push(root.val);
+      prev = root;
+      root = null;
+    } else {
+      // 存在右节点根节点需要重新入栈;
+      stack.push(root);
+      root = root.right;
+    }
   }
 
   return ans;

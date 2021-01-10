@@ -49,7 +49,7 @@ var preorderTraversal = function (root) {
   let stack = [];
   while (root || stack.length) {
     while (root) {
-      // ans.push(root.val);
+      ans.push(root.val);
       stack.push(root);
       root = root.left;
     }
