@@ -20,18 +20,71 @@
  * @return {number}
  */
 var kthSmallest = function (root, k) {
+  // let stack = [];
+  // while (stack.length || root) {
+  //   while (root) {
+  //     stack.push(root);
+  //     root = root.left;
+  //   }
+  //   root = stack.pop();
+  //   if (--k === 0) {
+  //     break;
+  //   }
+  //   root = root.right;
+  // }
+  // return root.val;
+
+  // 第K个最小的元素， 中序遍历
+  // let res = [];
+
+  // function rec(node) {
+  //   if (!node) {
+  //     return;
+  //   }
+  //   rec(node.left);
+  //   res.push(node.val);
+  //   rec(node.right);
+  // }
+
+  // rec(root);
+
+  // return res[k - 1];
+
+  // 优化  找到第 K 个后结束
+  // let num = 0;
+
+  // function rec(node) {
+  //   if (!node) {
+  //     return;
+  //   }
+  //   rec(node.left);
+  //   if (num !== 0) {
+  //     return;
+  //   }
+  //   if (--k === 0) {
+  //     num = node.val;
+  //     return;
+  //   }
+
+  //   rec(node.right);
+  // }
+
+  // rec(root);
+
+  // return num;
+
+  // 优化 ++ 使用迭代代替递归
   let stack = [];
-  while (stack.length || root) {
+  while (root || stack.length) {
     while (root) {
       stack.push(root);
       root = root.left;
     }
     root = stack.pop();
     if (--k === 0) {
-      break;
+      return root.val;
     }
     root = root.right;
   }
-  return root.val;
 };
 // @lc code=end

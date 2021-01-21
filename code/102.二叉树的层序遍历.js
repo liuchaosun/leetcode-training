@@ -2,7 +2,7 @@
  * @Author: liuchaosun
  * @Date: 2020-10-10 11:10:40
  * @Last Modified by: liuchaosun
- * @Last Modified time: 2020-10-12 13:40:49
+ * @Last Modified time: 2021-01-07 16:46:16
  */
 /*
  * @lc app=leetcode.cn id=102 lang=javascript
@@ -73,31 +73,58 @@ var levelOrder = function (root) {
   // return result;
 
   // 第三遍
-  let ans = [];
+  // let ans = [];
+  // if (!root) {
+  //   return ans;
+  // }
+  // let queue = [root];
+  // while (queue.length) {
+  //   let level = [];
+  //   let tmp = [];
+  //   for (let i = 0, n = queue.length; i < n; i++) {
+  //     let node = queue.pop();
+  //     level.push(node.val);
+  //     if (node.left) {
+  //       // 从数组前面插入损耗太大，改为后面插入
+  //       // queue.unshift(node.left);
+  //       tmp.push(node.left);
+  //     }
+  //     if (node.right) {
+  //       // queue.unshift(node.right);
+  //       tmp.push(node.right);
+  //     }
+  //   }
+  //   queue = tmp.reverse();
+  //   ans.push(level);
+  // }
+
+  // return ans;
+
+  // BFS 层序遍历
   if (!root) {
-    return ans;
+    return [];
   }
-  let queue = [root];
-  while (queue.length) {
-    let level = [];
+  let res = [];
+  let nodes = [root];
+
+  while (nodes.length > 0) {
+    let len = nodes.length;
     let tmp = [];
-    for (let i = 0, n = queue.length; i < n; i++) {
-      let node = queue.pop();
-      level.push(node.val);
-      if (node.left) {
-        // 从数组前面插入损耗太大，改为后面插入
-        // queue.unshift(node.left);
-        tmp.push(node.left);
+    for (let i = 0; i < len; i++) {
+      let cur = nodes.shift();
+
+      if (cur.left !== null) {
+        nodes.push(cur.left);
       }
-      if (node.right) {
-        // queue.unshift(node.right);
-        tmp.push(node.right);
+      if (cur.right !== null) {
+        nodes.push(cur.right);
       }
+
+      tmp.push(cur.val);
     }
-    queue = tmp.reverse();
-    ans.push(level);
+    res.push(tmp);
   }
 
-  return ans;
+  return res;
 };
 // @lc code=end
