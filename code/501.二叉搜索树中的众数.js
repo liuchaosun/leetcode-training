@@ -18,39 +18,34 @@
  */
 var findMode = function (root) {
   // 二叉搜索树 中序遍历
-  let hash = {};
-  let keys = [];
+  let ans = [];
+  let base;
+  let count = 1;
+  let maxCount = 0;
+  function update(val) {
+    if (base === val) {
+      count++;
+    } else {
+      // 新的值 重置
+      base = val;
+      count = 1;
+    }
+    if (count > maxCount) {
+      maxCount = count;
+      ans = [base];
+    } else if (count === maxCount) {
+      ans.push(base);
+    }
+  }
   function rec(node) {
     if (!node) {
       return;
     }
     rec(node.left);
-    let val = node.val;
-    if (hash[val] !== void 0) {
-      hash[val]++;
-    } else {
-      hash[val] = 1;
-      keys.push(val);
-    }
+    update(node.val);
     rec(node.right);
   }
   rec(root);
-
-  let ans = [];
-  let max = 0;
-  for (let index = 0; index < keys.length; index++) {
-    const k = keys[index];
-    if (hash[k] > max) {
-      max = hash[k];
-    }
-  }
-  for (let index = 0; index < keys.length; index++) {
-    const k = keys[index];
-    if (hash[k] === max) {
-      ans.push(k);
-    }
-  }
-
   return ans;
 };
 // @lc code=end
